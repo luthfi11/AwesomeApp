@@ -1,28 +1,39 @@
-package com.luthfi.awesomeapp.data.repository.api
+package com.luthfi.awesomeapp.di
 
+import com.luthfi.awesomeapp.data.repository.DataRepository
+import com.luthfi.awesomeapp.data.repository.api.ApiService
+import com.luthfi.awesomeapp.ui.main.MainViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.android.viewmodel.dsl.viewModel
+import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-object ApiConfig {
-
-    private fun provideOkHttpClient(): OkHttpClient {
-        return OkHttpClient.Builder()
+val networkModule = module {
+    single {
+        OkHttpClient.Builder()
             .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
             .connectTimeout(120, TimeUnit.SECONDS)
             .readTimeout(120, TimeUnit.SECONDS)
             .build()
     }
 
-    fun provideApiService(): ApiService {
+    single {
         val retrofit = Retrofit.Builder()
             .baseUrl("https://api.pexels.com/v1/")
             .addConverterFactory(GsonConverterFactory.create())
-            .client(provideOkHttpClient())
+            .client(get())
             .build()
 
-        return retrofit.create(ApiService::class.java)
+        retrofit.create(ApiService::class.java)
     }
+}
+
+val repositoryModule = module {
+    factory { DataRepository(get()) }
+}
+val viewModelModule = module {
+    viewModel { MainViewModel(get()) }
 }

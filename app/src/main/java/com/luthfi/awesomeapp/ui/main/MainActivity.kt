@@ -1,19 +1,29 @@
 package com.luthfi.awesomeapp.ui.main
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.luthfi.awesomeapp.R
+import com.luthfi.awesomeapp.databinding.ActivityMainBinding
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
 
+    private val viewModel: MainViewModel by viewModel()
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        setSupportActionBar(findViewById(R.id.toolbar))
-        findViewById<CollapsingToolbarLayout>(R.id.toolbar_layout).title = title
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        setSupportActionBar(binding.toolbar)
+
+        viewModel.imageList.observe(this, {
+            Log.d("AAAAAAAAAAAAAAAAAAAAAAA", it.toString())
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
