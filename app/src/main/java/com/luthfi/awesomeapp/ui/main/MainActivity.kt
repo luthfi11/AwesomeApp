@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -50,12 +51,13 @@ class MainActivity : AppCompatActivity(), OnImageClick {
 
                     gridAdapter.setImageData(it.data)
                     listAdapter.setImageData(it.data)
+
+                    binding.shimmerHome.visibility = View.GONE
                 }
-                is ApiResponse.Error -> Toast.makeText(
-                    this,
-                    it.errorMessage,
-                    Toast.LENGTH_SHORT
-                ).show()
+                is ApiResponse.Error -> {
+                    Toast.makeText(this, it.errorMessage, Toast.LENGTH_SHORT).show()
+                    binding.shimmerHome.visibility = View.GONE
+                }
             }
         }
     }
