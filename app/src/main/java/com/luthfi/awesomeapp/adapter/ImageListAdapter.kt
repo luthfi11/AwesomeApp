@@ -8,8 +8,10 @@ import com.bumptech.glide.Glide
 import com.luthfi.awesomeapp.R
 import com.luthfi.awesomeapp.data.model.Image
 import com.luthfi.awesomeapp.databinding.ItemImageListBinding
+import com.luthfi.awesomeapp.util.OnImageClick
 
-class ImageListAdapter: RecyclerView.Adapter<ImageListAdapter.ViewHolder>() {
+class ImageListAdapter(private val onImageClick: OnImageClick) :
+    RecyclerView.Adapter<ImageListAdapter.ViewHolder>() {
 
     private val imageList = arrayListOf<Image?>()
 
@@ -22,7 +24,9 @@ class ImageListAdapter: RecyclerView.Adapter<ImageListAdapter.ViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_image_list, parent, false))
+        return ViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.item_image_list, parent, false)
+        )
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -31,7 +35,7 @@ class ImageListAdapter: RecyclerView.Adapter<ImageListAdapter.ViewHolder>() {
 
     override fun getItemCount(): Int = imageList.size
 
-    inner class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
+    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ItemImageListBinding.bind(view)
 
         fun bind(image: Image?) {
@@ -41,6 +45,10 @@ class ImageListAdapter: RecyclerView.Adapter<ImageListAdapter.ViewHolder>() {
 
                     tvPhotographerName.text = it.photographer
                     tvPhotographerUrl.text = it.photographerUrl
+                }
+
+                root.setOnClickListener {
+                    image?.let { onImageClick.goToDetail(it) }
                 }
             }
         }

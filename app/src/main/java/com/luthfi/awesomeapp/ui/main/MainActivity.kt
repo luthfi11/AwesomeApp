@@ -1,5 +1,6 @@
 package com.luthfi.awesomeapp.ui.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -15,10 +16,12 @@ import com.luthfi.awesomeapp.adapter.ImageListAdapter
 import com.luthfi.awesomeapp.data.model.Image
 import com.luthfi.awesomeapp.data.repository.api.ApiResponse
 import com.luthfi.awesomeapp.databinding.ActivityMainBinding
+import com.luthfi.awesomeapp.ui.detail.ImageDetailActivity
+import com.luthfi.awesomeapp.util.OnImageClick
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.util.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), OnImageClick {
 
     private val viewModel: MainViewModel by viewModel()
     private lateinit var binding: ActivityMainBinding
@@ -31,8 +34,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
 
-        gridAdapter = ImageGridAdapter()
-        listAdapter = ImageListAdapter()
+        gridAdapter = ImageGridAdapter(this)
+        listAdapter = ImageListAdapter(this)
 
         viewModel.imageList.observe(this, imageObserver)
         setGridLayout()
@@ -89,5 +92,12 @@ class MainActivity : AppCompatActivity() {
 
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    override fun goToDetail(image: Image) {
+        val intent = Intent(this, ImageDetailActivity::class.java).apply {
+            putExtra("data", image)
+        }
+        startActivity(intent)
     }
 }

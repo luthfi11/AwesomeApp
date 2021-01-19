@@ -1,5 +1,6 @@
 package com.luthfi.awesomeapp.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,8 +9,10 @@ import com.bumptech.glide.Glide
 import com.luthfi.awesomeapp.R
 import com.luthfi.awesomeapp.data.model.Image
 import com.luthfi.awesomeapp.databinding.ItemImageGridBinding
+import com.luthfi.awesomeapp.ui.detail.ImageDetailActivity
+import com.luthfi.awesomeapp.util.OnImageClick
 
-class ImageGridAdapter: RecyclerView.Adapter<ImageGridAdapter.ViewHolder>() {
+class ImageGridAdapter(private val onImageClick: OnImageClick): RecyclerView.Adapter<ImageGridAdapter.ViewHolder>() {
 
     private val imageList = arrayListOf<Image?>()
 
@@ -41,6 +44,10 @@ class ImageGridAdapter: RecyclerView.Adapter<ImageGridAdapter.ViewHolder>() {
 
                     tvPhotographerName.text = it.photographer
                     tvPhotographerUrl.text = it.photographerUrl
+                }
+
+                root.setOnClickListener {
+                    image?.let { onImageClick.goToDetail(it) }
                 }
             }
         }
