@@ -7,9 +7,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.luthfi.awesomeapp.R
 import com.luthfi.awesomeapp.data.model.Image
-import com.luthfi.awesomeapp.databinding.ItemImageGridBinding
+import com.luthfi.awesomeapp.databinding.ItemImageListBinding
 
-class ImageGridAdapter: RecyclerView.Adapter<ImageGridAdapter.ViewHolder>() {
+class ImageListAdapter: RecyclerView.Adapter<ImageListAdapter.ViewHolder>() {
 
     private val imageList = arrayListOf<Image?>()
 
@@ -22,7 +22,7 @@ class ImageGridAdapter: RecyclerView.Adapter<ImageGridAdapter.ViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_image_grid, parent, false))
+        return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_image_list, parent, false))
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -32,7 +32,7 @@ class ImageGridAdapter: RecyclerView.Adapter<ImageGridAdapter.ViewHolder>() {
     override fun getItemCount(): Int = imageList.size
 
     inner class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
-        private val binding = ItemImageGridBinding.bind(view)
+        private val binding = ItemImageListBinding.bind(view)
 
         fun bind(image: Image?) {
             with(binding) {
