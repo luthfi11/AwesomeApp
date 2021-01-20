@@ -34,7 +34,7 @@ class ImageGridAdapter(private val onImageClick: OnImageClick) :
                     Glide.with(root.context).load(it.src?.medium).into(ivImageHome)
 
                     tvPhotographerName.text = it.photographer
-                    tvPhotographerUrl.text = it.photographerUrl
+                    tvPhotographerUrl.text = it.photographerUrl?.drop(23)
                 }
 
                 root.setOnClickListener {
