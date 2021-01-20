@@ -12,6 +12,7 @@ import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.luthfi.awesomeapp.R
 import com.luthfi.awesomeapp.adapter.ImageGridAdapter
 import com.luthfi.awesomeapp.adapter.ImageListAdapter
@@ -33,28 +34,35 @@ class MainActivity : AppCompatActivity(), OnImageClick {
     private lateinit var listAdapter: ImageListAdapter
     private lateinit var imageData: PagingData<Image>
 
+    companion object {
+        const val COVER_IMAGE = "https://images.pexels.com/photos/1376201/pexels-photo-1376201.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
 
+        Glide.with(this).load(COVER_IMAGE).into(binding.ivCover)
+
         gridAdapter = ImageGridAdapter(this)
         listAdapter = ImageListAdapter(this)
 
+        initData()
+        setGridLayout()
+    }
+
+    private fun initData() {
         lifecycleScope.launch {
             viewModel.imageList.collectLatest {
                 imageData = it
             }
         }
-
-        setGridLayout()
     }
 
     private fun setGridLayout() {
-        lifecycleScope.launch {
-            gridAdapter.submitData(imageData)
-        }
+        lifecycleScope.launch { gridAdapter.submitData(imageData) }
 
         binding.layoutMain.rvImageGrid.apply {
             layoutManager = GridLayoutManager(this@MainActivity, 2)
@@ -65,9 +73,7 @@ class MainActivity : AppCompatActivity(), OnImageClick {
     }
 
     private fun setListLayout() {
-        lifecycleScope.launch {
-            listAdapter.submitData(imageData)
-        }
+        lifecycleScope.launch { listAdapter.submitData(imageData) }
 
         binding.layoutMain.rvImageGrid.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)

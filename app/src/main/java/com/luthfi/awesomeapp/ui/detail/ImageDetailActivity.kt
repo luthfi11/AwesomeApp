@@ -21,10 +21,13 @@ class ImageDetailActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val data = intent.getParcelableExtra<Image>("data")
+        showImageData(data)
+    }
 
+    private fun showImageData(data: Image?) {
         data?.let {
             with(binding) {
-                Glide.with(this@ImageDetailActivity).load(it.src?.original).placeholder(R.color.gray).into(ivImageDetail)
+                Glide.with(this@ImageDetailActivity).load(it.src?.large).placeholder(R.color.gray).into(ivImageDetail)
                 tvPhotographerName.text = it.photographer
                 tvPhotographerUrl.text = it.photographerUrl
 

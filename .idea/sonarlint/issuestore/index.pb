@@ -11,8 +11,6 @@ p
 @app/src/main/java/com/luthfi/awesomeapp/ui/main/MainViewModel.kt,2\b\2b6195a1ddf16fe1a918f57cf0330ec388a5ecf3
 y
 Iapp/src/main/java/com/luthfi/awesomeapp/data/repository/api/ApiService.kt,5\6\562662a78f16574c73eb03533e13b99d02abc089
-y
-Iapp/src/main/java/com/luthfi/awesomeapp/data/repository/DataRepository.kt,3\6\36ac4a2365b55ac5f74fdf1844ad16f0d2aad939
 @
 app/build.gradle,f\4\f4a01d6a4fcb971362ec00a83903fd3902f52164
 h
@@ -33,5 +31,7 @@ g
 7app/src/main/java/com/luthfi/awesomeapp/di/AppModule.kt,9\9\99230daa7990761e002770c4433dc88dd0e1bf19
 z
 Japp/src/main/java/com/luthfi/awesomeapp/data/repository/api/ApiResponse.kt,c\4\c466db9dc0b7cd6a4ed556f41e5509c7d9aaee30
-o
-?app/src/main/java/com/luthfi/awesomeapp/adapter/ImageAdapter.kt,b\8\b85bdc3ff0c7e6c7fa87651f98ca763a4d58c36e
+z
+Japp/src/main/java/com/luthfi/awesomeapp/data/repository/ImageRepository.kt,a\6\a69c5c58b3e7160cf684bc1c00c383542afc8891
+|
+Lapp/src/main/java/com/luthfi/awesomeapp/data/repository/ImagePagingSource.kt,b\9\b970daa42a9ee18fc3cf4dd0907e36396e24e161
