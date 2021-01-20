@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity(), OnImageClick {
     private fun setGridLayout() {
         lifecycleScope.launch { gridAdapter.submitData(imageData) }
 
-        binding.layoutMain.rvImageGrid.apply {
+        binding.layoutMain.rvImage.apply {
             layoutManager = GridLayoutManager(this@MainActivity, 2)
             adapter = gridAdapter
         }
@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity(), OnImageClick {
     private fun setListLayout() {
         lifecycleScope.launch { listAdapter.submitData(imageData) }
 
-        binding.layoutMain.rvImageGrid.apply {
+        binding.layoutMain.rvImage.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
             adapter = listAdapter
         }
