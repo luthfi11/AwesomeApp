@@ -14,9 +14,9 @@
         <ImageView
             android:id="@+id/iv_image_detail"
             android:layout_width="match_parent"
-            android:layout_height="500dp"
+            android:layout_height="wrap_content"
             android:contentDescription="@string/app_name"
-            android:scaleType="centerCrop"
+            android:adjustViewBounds="true"
             tools:src="@tools:sample/backgrounds/scenic" />
 
         <TextView

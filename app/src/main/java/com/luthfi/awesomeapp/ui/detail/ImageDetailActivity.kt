@@ -1,5 +1,7 @@
 package com.luthfi.awesomeapp.ui.detail
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -22,9 +24,15 @@ class ImageDetailActivity : AppCompatActivity() {
 
         data?.let {
             with(binding) {
-                Glide.with(this@ImageDetailActivity).load(it.src?.portrait).placeholder(R.color.gray).into(ivImageDetail)
+                Glide.with(this@ImageDetailActivity).load(it.src?.original).placeholder(R.color.gray).into(ivImageDetail)
                 tvPhotographerName.text = it.photographer
                 tvPhotographerUrl.text = it.photographerUrl
+
+                tvPhotographerUrl.setOnClickListener { _ ->
+                    val intent = Intent(Intent.ACTION_VIEW)
+                    intent.data = Uri.parse(it.photographerUrl)
+                    startActivity(intent)
+                }
             }
         }
     }
