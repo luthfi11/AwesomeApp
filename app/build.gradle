@@ -62,6 +62,8 @@ dependencies {
 
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
 
+    implementation 'androidx.paging:paging-runtime-ktx:3.0.0-alpha12'
+
     testImplementation 'junit:junit:4.13.1'
     testImplementation 'org.mockito:mockito-core:2.22.0'
     testImplementation 'org.mockito:mockito-inline:2.22.0'

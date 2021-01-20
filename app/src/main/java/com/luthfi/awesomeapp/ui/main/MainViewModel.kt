@@ -1,13 +1,13 @@
 package com.luthfi.awesomeapp.ui.main
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
-import androidx.lifecycle.liveData
-import com.luthfi.awesomeapp.data.repository.DataRepository
+import androidx.lifecycle.viewModelScope
+import androidx.paging.cachedIn
+import com.luthfi.awesomeapp.data.repository.ImageRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-class MainViewModel(dataRepository: DataRepository): ViewModel() {
+class MainViewModel(imageRepository: ImageRepository): ViewModel() {
 
-    val imageList = liveData {
-        emitSource(dataRepository.getImageList().asLiveData())
-    }
+    val imageList = imageRepository.getImageList().cachedIn(viewModelScope)
 }

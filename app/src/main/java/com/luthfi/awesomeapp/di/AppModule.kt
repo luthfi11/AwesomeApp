@@ -1,6 +1,6 @@
 package com.luthfi.awesomeapp.di
 
-import com.luthfi.awesomeapp.data.repository.DataRepository
+import com.luthfi.awesomeapp.data.repository.ImageRepository
 import com.luthfi.awesomeapp.data.repository.api.ApiService
 import com.luthfi.awesomeapp.ui.main.MainViewModel
 import okhttp3.OkHttpClient
@@ -32,7 +32,7 @@ val networkModule = module {
 }
 
 val repositoryModule = module {
-    factory { DataRepository(get()) }
+    factory { ImageRepository(get()) }
 }
 val viewModelModule = module {
     viewModel { MainViewModel(get()) }

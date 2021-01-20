@@ -1,40 +1,31 @@
 package com.luthfi.awesomeapp.adapter
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.luthfi.awesomeapp.R
 import com.luthfi.awesomeapp.data.model.Image
 import com.luthfi.awesomeapp.databinding.ItemImageGridBinding
-import com.luthfi.awesomeapp.ui.detail.ImageDetailActivity
 import com.luthfi.awesomeapp.util.OnImageClick
 
-class ImageGridAdapter(private val onImageClick: OnImageClick): RecyclerView.Adapter<ImageGridAdapter.ViewHolder>() {
+class ImageGridAdapter(private val onImageClick: OnImageClick) :
+    PagingDataAdapter<Image, ImageGridAdapter.ImageViewHolder>(ImageComparator) {
 
-    private val imageList = arrayListOf<Image?>()
-
-    fun setImageData(newData: List<Image?>?) {
-        if (newData == null) return
-
-        imageList.clear()
-        imageList.addAll(newData)
-        notifyDataSetChanged()
+    override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
+        holder.bind(getItem(position))
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_image_grid, parent, false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {
+        return ImageViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.item_image_grid, parent, false)
+        )
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(imageList[position])
-    }
-
-    override fun getItemCount(): Int = imageList.size
-
-    inner class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
+    inner class ImageViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ItemImageGridBinding.bind(view)
 
         fun bind(image: Image?) {
@@ -50,6 +41,17 @@ class ImageGridAdapter(private val onImageClick: OnImageClick): RecyclerView.Ada
                     image?.let { onImageClick.goToDetail(it) }
                 }
             }
+        }
+    }
+
+    object ImageComparator : DiffUtil.ItemCallback<Image>() {
+
+        override fun areItemsTheSame(oldItem: Image, newItem: Image): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: Image, newItem: Image): Boolean {
+            return oldItem == newItem
         }
     }
 }

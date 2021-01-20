@@ -33,3 +33,5 @@ g
 7app/src/main/java/com/luthfi/awesomeapp/di/AppModule.kt,9\9\99230daa7990761e002770c4433dc88dd0e1bf19
 z
 Japp/src/main/java/com/luthfi/awesomeapp/data/repository/api/ApiResponse.kt,c\4\c466db9dc0b7cd6a4ed556f41e5509c7d9aaee30
+o
+?app/src/main/java/com/luthfi/awesomeapp/adapter/ImageAdapter.kt,b\8\b85bdc3ff0c7e6c7fa87651f98ca763a4d58c36e

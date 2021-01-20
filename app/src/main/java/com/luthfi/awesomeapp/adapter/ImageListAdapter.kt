@@ -3,40 +3,30 @@ package com.luthfi.awesomeapp.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.luthfi.awesomeapp.R
 import com.luthfi.awesomeapp.data.model.Image
-import com.luthfi.awesomeapp.databinding.ItemImageListBinding
+import com.luthfi.awesomeapp.databinding.ItemImageGridBinding
 import com.luthfi.awesomeapp.util.OnImageClick
 
 class ImageListAdapter(private val onImageClick: OnImageClick) :
-    RecyclerView.Adapter<ImageListAdapter.ViewHolder>() {
+    PagingDataAdapter<Image, ImageListAdapter.ImageViewHolder>(ImageComparator) {
 
-    private val imageList = arrayListOf<Image?>()
-
-    fun setImageData(newData: List<Image?>?) {
-        if (newData == null) return
-
-        imageList.clear()
-        imageList.addAll(newData)
-        notifyDataSetChanged()
+    override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
+        holder.bind(getItem(position))
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {
+        return ImageViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.item_image_list, parent, false)
         )
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(imageList[position])
-    }
-
-    override fun getItemCount(): Int = imageList.size
-
-    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val binding = ItemImageListBinding.bind(view)
+    inner class ImageViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        private val binding = ItemImageGridBinding.bind(view)
 
         fun bind(image: Image?) {
             with(binding) {
@@ -51,6 +41,17 @@ class ImageListAdapter(private val onImageClick: OnImageClick) :
                     image?.let { onImageClick.goToDetail(it) }
                 }
             }
+        }
+    }
+
+    object ImageComparator : DiffUtil.ItemCallback<Image>() {
+
+        override fun areItemsTheSame(oldItem: Image, newItem: Image): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: Image, newItem: Image): Boolean {
+            return oldItem == newItem
         }
     }
 }

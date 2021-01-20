@@ -14,7 +14,7 @@ data class Response(
 	val page: Int? = null,
 
 	@field:SerializedName("photos")
-	val photos: List<Image?>? = null,
+	val photos: List<Image>? = null,
 
 	@field:SerializedName("total_results")
 	val totalResults: Int? = null
