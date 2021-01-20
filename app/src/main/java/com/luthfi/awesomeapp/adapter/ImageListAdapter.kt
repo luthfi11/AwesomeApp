@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.luthfi.awesomeapp.R
-import com.luthfi.awesomeapp.data.model.Image
+import com.luthfi.awesomeapp.core.model.Image
 import com.luthfi.awesomeapp.databinding.ItemImageGridBinding
 import com.luthfi.awesomeapp.util.OnImageClick
 

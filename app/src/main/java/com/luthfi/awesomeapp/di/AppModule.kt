@@ -1,7 +1,7 @@
 package com.luthfi.awesomeapp.di
 
-import com.luthfi.awesomeapp.data.repository.ImageRepository
-import com.luthfi.awesomeapp.data.repository.api.ApiService
+import com.luthfi.awesomeapp.core.repository.ImageRepository
+import com.luthfi.awesomeapp.core.api.ApiService
 import com.luthfi.awesomeapp.ui.main.MainViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

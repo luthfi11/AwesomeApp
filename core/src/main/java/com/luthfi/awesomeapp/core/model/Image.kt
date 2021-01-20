@@ -1,4 +1,4 @@
-package com.luthfi.awesomeapp.data.model
+package com.luthfi.awesomeapp.core.model
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName

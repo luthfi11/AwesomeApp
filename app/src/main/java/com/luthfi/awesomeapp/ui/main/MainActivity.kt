@@ -16,7 +16,7 @@ import com.bumptech.glide.Glide
 import com.luthfi.awesomeapp.R
 import com.luthfi.awesomeapp.adapter.ImageGridAdapter
 import com.luthfi.awesomeapp.adapter.ImageListAdapter
-import com.luthfi.awesomeapp.data.model.Image
+import com.luthfi.awesomeapp.core.model.Image
 import com.luthfi.awesomeapp.databinding.ActivityMainBinding
 import com.luthfi.awesomeapp.ui.detail.ImageDetailActivity
 import com.luthfi.awesomeapp.util.OnImageClick
@@ -35,7 +35,8 @@ class MainActivity : AppCompatActivity(), OnImageClick {
     private lateinit var imageData: PagingData<Image>
 
     companion object {
-        const val COVER_IMAGE = "https://images.pexels.com/photos/1376201/pexels-photo-1376201.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200"
+        const val COVER_IMAGE = "https://images.pexels.com/photos/1376201/pexels-photo-1376201.jpeg?" +
+                "auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

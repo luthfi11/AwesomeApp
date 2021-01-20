@@ -1,7 +1,7 @@
-package com.luthfi.awesomeapp.data.repository.api
+package com.luthfi.awesomeapp.core.api
 
-import com.luthfi.awesomeapp.BuildConfig
-import com.luthfi.awesomeapp.data.model.Response
+import com.luthfi.awesomeapp.core.BuildConfig
+import com.luthfi.awesomeapp.core.model.Response
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Query

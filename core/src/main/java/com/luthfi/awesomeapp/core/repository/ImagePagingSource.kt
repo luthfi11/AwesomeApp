@@ -1,8 +1,8 @@
-package com.luthfi.awesomeapp.data.repository
+package com.luthfi.awesomeapp.core.repository
 
 import androidx.paging.PagingSource
-import com.luthfi.awesomeapp.data.model.Image
-import com.luthfi.awesomeapp.data.repository.api.ApiService
+import com.luthfi.awesomeapp.core.model.Image
+import com.luthfi.awesomeapp.core.api.ApiService
 
 class ImagePagingSource(private val apiService: ApiService) : PagingSource<Int, Image>() {
 
