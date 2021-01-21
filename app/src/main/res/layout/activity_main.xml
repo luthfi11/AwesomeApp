@@ -66,4 +66,8 @@
         android:id="@+id/layout_main"
         layout="@layout/content_main" />
 
+    <include
+        android:id="@+id/layout_error"
+        layout="@layout/layout_error_message" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

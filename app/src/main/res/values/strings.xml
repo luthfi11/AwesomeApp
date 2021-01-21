@@ -4,4 +4,6 @@
     <string name="change_to_list">Change to list</string>
     <string name="photographer_name">Photographer Name</string>
     <string name="photographer_url">Photographer URL</string>
+    <string name="message_error">Failed to fetch data. Please check your internet connection and try again :)</string>
+    <string name="retry">Retry</string>
 </resources>

@@ -1,22 +1,27 @@
 package com.luthfi.awesomeapp.di
 
-import com.luthfi.awesomeapp.core.repository.ImageRepository
 import com.luthfi.awesomeapp.core.api.ApiService
+import com.luthfi.awesomeapp.core.repository.ImageRepository
 import com.luthfi.awesomeapp.ui.main.MainViewModel
+import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.android.ext.koin.androidContext
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
+const val cacheSize = 10 * 1024 * 1024
+
 val networkModule = module {
     single {
         OkHttpClient.Builder()
+            .cache(Cache(androidContext().cacheDir, cacheSize.toLong()))
             .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
-            .connectTimeout(120, TimeUnit.SECONDS)
-            .readTimeout(120, TimeUnit.SECONDS)
+            .connectTimeout(5, TimeUnit.SECONDS)
+            .readTimeout(8, TimeUnit.SECONDS)
             .build()
     }
 

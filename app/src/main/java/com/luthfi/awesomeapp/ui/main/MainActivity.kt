@@ -6,6 +6,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
@@ -33,6 +34,7 @@ class MainActivity : AppCompatActivity(), OnImageClick {
     private lateinit var gridAdapter: ImageGridAdapter
     private lateinit var listAdapter: ImageListAdapter
     private lateinit var imageData: PagingData<Image>
+    private lateinit var menu: Menu
 
     companion object {
         const val COVER_IMAGE = "https://images.pexels.com/photos/1376201/pexels-photo-1376201.jpeg?" +
@@ -85,15 +87,27 @@ class MainActivity : AppCompatActivity(), OnImageClick {
     }
 
     private fun loadStateListener(loadState: CombinedLoadStates) {
-        if (loadState.refresh is LoadState.Loading) {
-            binding.shimmerHome.visibility = View.VISIBLE
-        } else {
-            binding.shimmerHome.visibility = View.GONE
+        binding.shimmerHome.visibility = if (loadState.refresh is LoadState.Loading) View.VISIBLE else View.GONE
+        binding.layoutError.root.visibility = if (loadState.refresh is LoadState.Error) View.VISIBLE else View.GONE
+        binding.layoutError.btnRetry.setOnClickListener {
+            gridAdapter.retry()
         }
+    }
+
+    private fun setGridIconActive() {
+        menu.getItem(0).icon = ContextCompat.getDrawable(this, R.drawable.ic_grid_active)
+        menu.getItem(1).icon = ContextCompat.getDrawable(this, R.drawable.ic_list)
+    }
+
+    private fun setListIconActive() {
+        menu.getItem(0).icon = ContextCompat.getDrawable(this, R.drawable.ic_grid)
+        menu.getItem(1).icon = ContextCompat.getDrawable(this, R.drawable.ic_list_active)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_home, menu)
+        this.menu = menu
+        setGridIconActive()
         return true
     }
 
@@ -101,10 +115,12 @@ class MainActivity : AppCompatActivity(), OnImageClick {
         return when (item.itemId) {
             R.id.action_grid -> {
                 setGridLayout()
+                setGridIconActive()
                 true
             }
             R.id.action_list -> {
                 setListLayout()
+                setListIconActive()
                 true
             }
 
