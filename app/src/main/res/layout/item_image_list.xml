@@ -33,7 +33,7 @@
             android:layout_toEndOf="@id/iv_image_home"
             android:ellipsize="end"
             android:maxLines="2"
-            android:textColor="@color/black"
+            android:textColor="@color/textPrimary"
             android:textSize="20sp"
             tools:text="@tools:sample/full_names" />
 

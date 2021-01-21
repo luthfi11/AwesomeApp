@@ -10,4 +10,6 @@
     <color name="blue">#4285F4</color>
     <color name="gray">#CCCCCC</color>
     <color name="semi_white">#DDDDDD</color>
+
+    <color name="textPrimary">#000000</color>
 </resources>

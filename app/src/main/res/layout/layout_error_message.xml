@@ -18,13 +18,15 @@
         android:layout_height="wrap_content"
         android:text="@string/message_error"
         android:textAlignment="center"
-        android:textColor="@color/black" />
+        android:textColor="@color/textPrimary" />
 
     <Button
         android:id="@+id/btn_retry"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:backgroundTint="@color/purple_500"
+        android:textColor="@color/white"
         android:text="@string/retry" />
 
 </LinearLayout>
